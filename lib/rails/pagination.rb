@@ -38,7 +38,7 @@ module Rails
       pages = ApiPagination.pages_from(collection)
 
       pages.each do |k, v|
-        new_params = request.query_parameters
+        new_params = request.query_parameters.merge(ApiPagination.config.page_param => v)
         links << %(<#{url}?#{new_params.to_param}>; rel="#{k}")
       end
 
